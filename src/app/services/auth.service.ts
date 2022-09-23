@@ -3,6 +3,7 @@ import {
   Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -10,6 +11,14 @@ import {
 })
 export class AuthService {
   constructor(private auth: Auth) {}
+
+  initAuthListener() {
+    onAuthStateChanged(this.auth, (user) => {
+      console.log(user);
+      console.log(user?.uid);
+      console.log(user?.email);
+    });
+  }
 
   // fix https://www.youtube.com/watch?v=8VTxuIvMTlc
 
