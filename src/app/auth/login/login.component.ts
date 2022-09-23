@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -33,6 +34,13 @@ export class LoginComponent implements OnInit {
         console.log(credential);
         this.router.navigate(['/']);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Ooops',
+          text: err.message,
+        });
+      });
   }
 }
