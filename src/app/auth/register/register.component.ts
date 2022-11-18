@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       title: 'One moment please',
       timerProgressBar: true,
       didOpen: () => {
-        Swal.showLoading();
+        Swal.showLoading(null);
       },
     });
 
