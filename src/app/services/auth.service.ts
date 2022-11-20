@@ -4,7 +4,9 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  authState,
 } from '@angular/fire/auth';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +33,8 @@ export class AuthService {
   }
   logout() {
     return this.auth.signOut();
+  }
+  isAuth() {
+    return authState(this.auth).pipe(map((fUser) => fUser != null));
   }
 }

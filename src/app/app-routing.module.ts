@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { dashboardRoutes } from './dashboard/dashboard.routes';
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: dashboardRoutes,
-    ...canActivate(() => redirectUnauthorizedTo(['login'])),
+    canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },
 ];
