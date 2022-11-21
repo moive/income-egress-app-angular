@@ -6,13 +6,16 @@ import {
   onAuthStateChanged,
   authState,
 } from '@angular/fire/auth';
+import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { map } from 'rxjs';
+import { UserCreated } from 'src/interfaces/user.interface';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private firestore: Firestore) {}
 
   initAuthListener() {
     onAuthStateChanged(this.auth, (user) => {
@@ -24,8 +27,14 @@ export class AuthService {
 
   // fix https://www.youtube.com/watch?v=8VTxuIvMTlc
 
-  createUser(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  createUser({ name, email, password }: UserCreated) {
+    return createUserWithEmailAndPassword(this.auth, email, password).then(
+      ({ user }) => {
+        const newUser = new User(user.uid, name, user.email as string);
+        const userRef = collection(this.firestore, 'user');
+        return addDoc(userRef, { ...newUser });
+      }
+    );
   }
 
   signIn(email: string, password: string) {

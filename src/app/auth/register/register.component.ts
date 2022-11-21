@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
 
     const { username, email, password } = this.registerForm.value;
     this.authService
-      .createUser(email, password)
+      .createUser({ name: username, email, password } as any)
       .then((credential) => {
         console.log(credential);
         Swal.close();
