@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { uiReducer, State } from './shared/ui.reducer';
 
-interface AppState {
+export interface AppState {
   ui: State;
 }
 

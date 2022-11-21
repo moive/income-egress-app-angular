@@ -30,8 +30,18 @@
                 [disabled]="loginForm.invalid"
                 type="submit"
                 class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                *ngIf="!loading"
               >
                 SIGN IN
+              </button>
+              <button
+                [disabled]="true"
+                type="button"
+                class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                *ngIf="loading"
+              >
+                <i class="fa fa-spin fa-sync"></i>
+                Waiting...
               </button>
             </div>
             <div class="my-2 d-flex justify-content-between align-items-center">
