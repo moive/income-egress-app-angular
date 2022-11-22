@@ -4,7 +4,11 @@
       <div class="card-body">
         <h4 class="card-title">Add Income / Egress</h4>
         <p class="card-description">Specify amount and type.</p>
-        <form class="forms-sample">
+        <form
+          class="forms-sample"
+          [formGroup]="incomeEgressForm"
+          (ngSubmit)="save()"
+        >
           <div class="form-group">
             <label>Description</label>
             <input
@@ -12,6 +16,7 @@
               name="description"
               class="form-control"
               placeholder="Description"
+              formControlName="description"
             />
           </div>
           <div class="form-group">
@@ -21,19 +26,26 @@
               name="amount"
               class="form-control"
               placeholder="Amount"
+              formControlName="amount"
             />
             <small>Must be a positive amount</small>
           </div>
           <div class="form-group">
             <label>Type</label>
-            <select name="type" class="form-control">
-              <option selected hidden>Choose a type...</option>
+            <select name="type" class="form-control" formControlName="type">
+              <option selected hidden value="0">Choose a type...</option>
               <option value="1">Income</option>
               <option value="2">Egress</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary me-2">Save</button>
-          <button class="btn btn-light">Cancel</button>
+          <button
+            type="submit"
+            class="btn btn-primary me-2"
+            [disabled]="incomeEgressForm.invalid"
+          >
+            Save
+          </button>
+          <button class="btn btn-light" type="reset">Cancel</button>
         </form>
       </div>
     </div>
