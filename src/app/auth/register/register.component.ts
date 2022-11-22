@@ -9,6 +9,7 @@ import { isLoading, stopLoading } from '../../shared/ui.actions';
 
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
+import { docData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-register',
@@ -59,7 +60,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService
       .createUser({ name: username, email, password } as any)
       .then((credential) => {
-        console.log(credential);
+        docData(credential).subscribe((r) => {
+          console.log('credential', r);
+        });
         // Swal.close();
         this.store.dispatch(stopLoading());
         this.router.navigate(['/']);

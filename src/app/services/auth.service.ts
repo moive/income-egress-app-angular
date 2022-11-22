@@ -3,38 +3,65 @@ import {
   Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   authState,
 } from '@angular/fire/auth';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
-import { map } from 'rxjs';
-import { UserCreated } from 'src/interfaces/user.interface';
-import { User } from '../models/user.model';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  Firestore,
+} from '@angular/fire/firestore';
+
+import { map, Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { unSetUser, setUser } from '../auth/auth.actions';
+
+import { IUser } from '../../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, private firestore: Firestore) {}
+  userSubscription!: Subscription;
+
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private store: Store
+  ) {}
 
   initAuthListener() {
-    onAuthStateChanged(this.auth, (user) => {
-      console.log(user);
-      console.log(user?.uid);
-      console.log(user?.email);
+    authState(this.auth).subscribe((fuser) => {
+      if (fuser) {
+        const userRef = collection(this.firestore, 'users');
+        this.userSubscription = collectionData(userRef, { idField: 'id' })
+          .pipe(
+            map((val) => val.filter((r: any) => r.email === fuser.email)[0])
+          )
+          .subscribe((user: any) => {
+            this.store.dispatch(setUser({ user }));
+          });
+      } else {
+        if (this.userSubscription) {
+          this.userSubscription.unsubscribe();
+        }
+        this.store.dispatch(unSetUser());
+      }
     });
   }
 
   // fix https://www.youtube.com/watch?v=8VTxuIvMTlc
+  // crud: https://www.youtube.com/watch?v=t_YSrxj0wGY
 
-  createUser({ name, email, password }: UserCreated) {
-    return createUserWithEmailAndPassword(this.auth, email, password).then(
-      ({ user }) => {
-        const newUser = new User(user.uid, name, user.email as string);
-        const userRef = collection(this.firestore, 'user');
-        return addDoc(userRef, { ...newUser });
-      }
-    );
+  createUser(user: IUser) {
+    return createUserWithEmailAndPassword(
+      this.auth,
+      user.email,
+      user.password
+    ).then(() => {
+      const userRef = collection(this.firestore, 'users');
+      return addDoc(userRef, user);
+    });
   }
 
   signIn(email: string, password: string) {
