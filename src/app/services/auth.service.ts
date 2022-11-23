@@ -24,6 +24,12 @@ import { IUser } from '../../interfaces/user.interface';
 export class AuthService {
   userSubscription!: Subscription;
 
+  private _user: IUser | null = null;
+
+  get user() {
+    return this._user;
+  }
+
   constructor(
     private auth: Auth,
     private firestore: Firestore,
@@ -39,12 +45,14 @@ export class AuthService {
             map((val) => val.filter((r: any) => r.email === fuser.email)[0])
           )
           .subscribe((user: any) => {
+            this._user = user;
             this.store.dispatch(setUser({ user }));
           });
       } else {
         if (this.userSubscription) {
           this.userSubscription.unsubscribe();
         }
+        this._user = null;
         this.store.dispatch(unSetUser());
       }
     });
