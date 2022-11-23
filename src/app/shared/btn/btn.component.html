@@ -1,9 +1,4 @@
-<button
-  [disabled]="isInvalid"
-  type="submit"
-  class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-  *ngIf="!loading"
->
+<button [disabled]="isInvalid" [type]="type" [class]="cssBtn" *ngIf="!loading">
   {{ label }}
 </button>
 <button

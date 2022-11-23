@@ -10,6 +10,9 @@ export class BtnComponent implements OnInit {
   @Input() isInvalid: boolean = true;
   @Input() label: string = 'Save';
   @Input() labelLoading: string = 'Waiting...';
+  @Input() type: string = 'submit';
+  @Input() cssBtn: string =
+    'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn';
 
   constructor() {}
 
