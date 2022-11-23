@@ -38,13 +38,18 @@
               <option value="2">Egress</option>
             </select>
           </div>
-          <button
+          <app-btn
+            [loading]="loading"
+            [isInvalid]="incomeEgressForm.invalid"
+            cssBtn="btn btn-primary me-2"
+          ></app-btn>
+          <!-- <button
             type="submit"
             class="btn btn-primary me-2"
             [disabled]="incomeEgressForm.invalid"
           >
             Save
-          </button>
+          </button> -->
           <button class="btn btn-light" type="reset">Cancel</button>
         </form>
       </div>
