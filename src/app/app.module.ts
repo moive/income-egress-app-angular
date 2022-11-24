@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { BtnComponent } from './shared/btn/btn.component';
+import { SortIncomeEgressPipe } from './income-egress/pipes/sort-income-egress.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BtnComponent } from './shared/btn/btn.component';
     NavbarComponent,
     SidebarComponent,
     BtnComponent,
+    SortIncomeEgressPipe,
   ],
   imports: [
     BrowserModule,
