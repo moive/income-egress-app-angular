@@ -3,10 +3,13 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
+  doc,
   Firestore,
 } from '@angular/fire/firestore';
 import { IincomeEgress } from '../../interfaces/income-egress.interface';
 import { AuthService } from './auth.service';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +26,14 @@ export class IncomeEgressService {
   initIncomeEgressListener(id: string) {
     const ref = collection(this.firestore, `${id}/ingresos-egresos/Items`);
     return collectionData(ref, { idField: 'id' });
+  }
+
+  removeIncomeEgress(id: string) {
+    const uid = this.authService.user?.id;
+    const refItemIncomeEgress = doc(
+      this.firestore,
+      `${uid}/ingresos-egresos/Items/${id}`
+    );
+    return deleteDoc(refItemIncomeEgress);
   }
 }

@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .select('user')
       .pipe(filter((auth) => auth.user != null))
       .subscribe(({ user }) => {
-        console.log(user);
+        // console.log(user);
         this.incomeEgressSub = this.incomeEgressService
           .initIncomeEgressListener(user?.id!)
           .subscribe((items: any[]) =>

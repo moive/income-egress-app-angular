@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { IincomeEgress } from 'src/interfaces/income-egress.interface';
 import { Subscription } from 'rxjs';
+import { IncomeEgressService } from '../../services/income-egress.service';
 
 @Component({
   selector: 'app-detail',
@@ -13,7 +14,10 @@ export class DetailComponent implements OnInit, OnDestroy {
   itemsCollection: IincomeEgress[] = [];
   incomeEgressSubs!: Subscription;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private incomeEgressService: IncomeEgressService
+  ) {}
 
   ngOnInit(): void {
     this.incomeEgressSubs = this.store
@@ -24,6 +28,6 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.incomeEgressSubs.unsubscribe();
   }
   remove(id: string) {
-    console.log(id);
+    this.incomeEgressService.removeIncomeEgress(id);
   }
 }
