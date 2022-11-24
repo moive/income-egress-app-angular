@@ -26,8 +26,9 @@ export class IncomeEgressService {
 
   initIncomeEgressListener(id: string) {
     const ref = collection(this.firestore, `${id}/ingresos-egresos/Items`);
-
-    return collectionData(ref, { idField: 'id' });
+    const q = query(ref, orderBy('amount'));
+    // return collectionData(q);
+    return collectionData(q, { idField: 'id' });
   }
 
   removeIncomeEgress(id: string) {
