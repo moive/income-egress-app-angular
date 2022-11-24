@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .createUser({ name: username, email, password } as any)
       .then((credential) => {
         docData(credential).subscribe((r) => {
-          console.log('credential', r);
+          // console.log('credential', r);
         });
         // Swal.close();
         this.store.dispatch(stopLoading());
