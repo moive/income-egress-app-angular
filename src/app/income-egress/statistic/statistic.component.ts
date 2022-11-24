@@ -13,6 +13,7 @@ export class StatisticComponent implements OnInit {
   totalEgress: number = 0;
   totalItemsIncome: number = 0;
   totalItemsEgress: number = 0;
+  difference: number = 0;
 
   constructor(private store: Store<AppState>) {}
 
@@ -39,5 +40,7 @@ export class StatisticComponent implements OnInit {
     );
     this.totalIncome = total.totalIncome;
     this.totalEgress = total.totalEgress;
+
+    this.difference = this.totalIncome - this.totalEgress;
   }
 }

@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between">
           <div class="icon-lg text-success">
             <i class="fa-solid fa-money-bill-1-wave"></i>
-            <p class="text-success d-flex" *ngIf="totalItemsIncome">
+            <p class="text-success d-flex">
               <i class="mdi mdi-menu-down"></i
               ><span>{{ totalItemsIncome }} items</span>
             </p>
@@ -24,7 +24,7 @@
         <div class="d-flex justify-content-between">
           <div class="icon-lg text-danger">
             <i class="fa-solid fa-money-bill-trend-up"></i>
-            <p class="text-danger d-flex" *ngIf="totalItemsEgress">
+            <p class="text-danger d-flex">
               <i class="mdi mdi-menu-down"></i
               ><span>{{ totalItemsEgress }} items</span>
             </p>
@@ -37,4 +37,46 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="row m-5">
+  <div class="col-12">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="fa fa-building text-info icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Difference</p>
+            <div class="fluid-container">
+              <h3
+                [class.text-success]="difference >= 0"
+                [class.text-danger]="difference < 0"
+              >
+                {{ difference | currency }}
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="col-12 p-5" *ngIf="ingresos > 0 || egresos > 0">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h1 class="card-title">Gráfica</h1>
+
+          <div style="display: block">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              chartType="doughnut">
+            </canvas>
+          </div>
+          
+        </div>
+      </div>
+  </div> -->
 </div>
