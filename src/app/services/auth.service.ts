@@ -17,6 +17,7 @@ import { Store } from '@ngrx/store';
 import { unSetUser, setUser } from '../auth/auth.actions';
 
 import { IUser } from '../../interfaces/user.interface';
+import { unSetItems } from '../income-egress/income-egress.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -76,6 +77,7 @@ export class AuthService {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
   logout() {
+    this.store.dispatch(unSetItems());
     return this.auth.signOut();
   }
   isAuth() {
