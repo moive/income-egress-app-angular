@@ -5,13 +5,14 @@
         <div class="d-flex justify-content-between">
           <div class="icon-lg text-success">
             <i class="fa-solid fa-money-bill-1-wave"></i>
-            <p class="text-danger d-flex">
-              <i class="mdi mdi-menu-down"></i><span>65% lower growth</span>
+            <p class="text-success d-flex" *ngIf="totalItemsIncome">
+              <i class="mdi mdi-menu-down"></i
+              ><span>{{ totalItemsIncome }} items</span>
             </p>
           </div>
           <div>
             <p class="statistics-title"><b>Income</b></p>
-            <h3 class="rate-percentage">$65,650</h3>
+            <h3 class="rate-percentage">{{ totalIncome | currency }}</h3>
           </div>
         </div>
       </div>
@@ -23,13 +24,14 @@
         <div class="d-flex justify-content-between">
           <div class="icon-lg text-danger">
             <i class="fa-solid fa-money-bill-trend-up"></i>
-            <p class="text-danger d-flex">
-              <i class="mdi mdi-menu-down"></i><span>65% lower growth</span>
+            <p class="text-danger d-flex" *ngIf="totalItemsEgress">
+              <i class="mdi mdi-menu-down"></i
+              ><span>{{ totalItemsEgress }} items</span>
             </p>
           </div>
           <div>
             <p class="statistics-title"><b>Egress</b></p>
-            <h3 class="rate-percentage">$65,650</h3>
+            <h3 class="rate-percentage">{{ totalEgress | currency }}</h3>
           </div>
         </div>
       </div>
