@@ -16,39 +16,34 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 
+// Modules
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeEgressComponent } from './income-egress/income-egress.component';
 import { DetailComponent } from './income-egress/detail/detail.component';
 import { StatisticComponent } from './income-egress/statistic/statistic.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { environment } from '../environments/environment';
-import { BtnComponent } from './shared/btn/btn.component';
 import { SortIncomeEgressPipe } from './income-egress/pipes/sort-income-egress.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     DashboardComponent,
     IncomeEgressComponent,
     DetailComponent,
     StatisticComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    BtnComponent,
     SortIncomeEgressPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
+    AuthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
