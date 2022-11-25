@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
+import { AppStateIncomeEgress } from '../income-egress.reducer';
 import { IincomeEgress } from 'src/interfaces/income-egress.interface';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -29,7 +29,7 @@ export class StatisticComponent implements OnInit {
     maintainAspectRatio: false,
   };
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppStateIncomeEgress>) {}
 
   ngOnInit(): void {
     this.store

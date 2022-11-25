@@ -11,6 +11,9 @@ import { StatisticComponent } from './statistic/statistic.component';
 import { SortIncomeEgressPipe } from './pipes/sort-income-egress.pipe';
 import { NgChartsModule } from 'ng2-charts';
 
+import { StoreModule } from '@ngrx/store';
+import { incomeEgressReducer } from './income-egress.reducer';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -19,6 +22,12 @@ import { NgChartsModule } from 'ng2-charts';
     StatisticComponent,
     SortIncomeEgressPipe,
   ],
-  imports: [CommonModule, SharedModule, DashboardRoutingModule, NgChartsModule],
+  imports: [
+    CommonModule,
+    StoreModule.forFeature('incomeEgress', incomeEgressReducer),
+    SharedModule,
+    DashboardRoutingModule,
+    NgChartsModule,
+  ],
 })
 export class IncomeEgressModule {}
