@@ -21,7 +21,6 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
-import { IncomeEgressModule } from './income-egress/income-egress.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +30,6 @@ import { IncomeEgressModule } from './income-egress/income-egress.module';
     ReactiveFormsModule,
     SharedModule,
     AuthModule,
-    IncomeEgressModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
